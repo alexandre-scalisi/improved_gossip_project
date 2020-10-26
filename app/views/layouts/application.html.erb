@@ -4,12 +4,33 @@
     <title>TheGossipProject</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <%= link_to 'The Gossip Project', "/", :class => "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <%= link_to "Home", "/", :class => "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Contact us', contact_us_path, :class => "nav-link"%>
+          </li>
+           <li class="nav-item">
+            <%= link_to 'Team', team_path, :class => "nav-link" %>
+          </li>
+        </ul>
+        
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
