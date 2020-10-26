@@ -1,10 +1,10 @@
 require 'faker'
 Faker::Config.locale = :fr
 
-User.destroy_all
-City.destroy_all
 Gossip.destroy_all
 Tag.destroy_all
+User.destroy_all
+City.destroy_all
 PrivateMessage.destroy_all
 JoinTableTagGossip.destroy_all
 LierPrivateMessageUser.destroy_all
