@@ -2,15 +2,15 @@
   <h1>Form for creating gossips</h1>
   <%= form_tag url_for(action: 'create'), method: "post" do %>
 
-  <%= label_tag 'Title : ' %>
+  <%= label_tag 'Title : ' %><br />
   <%= text_field_tag 'title' %>
   <br /> <br />
 
-  <%= label_tag 'Content : ' %>
+  <%= label_tag 'Content : ' %><br />
   <%= text_area_tag 'content',nil, :rows => 3, :cols => 50 %>
   <br /> <br />
 
-  <%= label_tag 'Author : ' %>
+  <%= label_tag 'Author : ' %><br />
   <%= text_field_tag 'author' %>
   <br /> <br />
 

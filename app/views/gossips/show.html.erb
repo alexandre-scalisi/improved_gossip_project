@@ -1,0 +1,17 @@
+<div class="container-fluid mt-4">
+  <h1><%=@gossip.title%></h1>
+  <div class="container-fluid">
+    <div class="pt-2">
+      <h3>Author : <%= link_to "#{@gossip.user.first_name}", user_path(@gossip.user.id) %>, from <%=@gossip.user.city.name %></h3>
+    </div>
+    <div class="pt-3">
+      <p>Content: <%=@gossip.content%></p>
+      <p>Creation date: <%=@gossip.created_at%></p>
+    </div>
+    <a href="<%= edit_gossip_path(@gossip.id) %>" class="btn">Modifier le gossip</a>
+    <a href="<%= gossip_path(@gossip.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Supprimer le gossip</a>
+    <a href="<%= comments_path(@gossip.id) %>" class="btn"><%=@gossip.comments.length%> commentaires</a>
+    <a href="<%= new_comment_path(@gossip.id) %>" class="btn">Ajouter commentaire</a>
+  </div>
+  <a href="/" class="btn">Page accueil</a>
+</div>

@@ -1,0 +1,23 @@
+<div class="container-fluid p-4 m-4">
+  <h1>Bienvenue visiteur. Ici c'est notre super site de potins, il est chouette, non ? </h1>
+
+
+  <div class="row p-3 m-4">
+    <% @users.each do |u|%>
+
+    <div class="card col-sm-12 col-md-4 col-lg-2 m-3 p-3" style="width: 18rem;">
+      <div class="card-header">
+        <%=u.first_name%>
+      </div>
+      <div class="card-body">
+        <%u.gossips.each do |g|%>
+        <p class="card-text"><%= link_to "#{g.title}", gossip_path("#{g.id}")%> </p>
+
+        <%end%>
+      </div>
+    </div>
+
+    <%end%>
+    <a href="<%= new_gossip_path %>" class="btn ">Créer un gossip</a>
+  </div>
+</div>

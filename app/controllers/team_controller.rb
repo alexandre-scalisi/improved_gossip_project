@@ -1,5 +1,5 @@
 class TeamController < ApplicationController
-  def introduce
+  def show
     
   end
 end

@@ -1,0 +1,9 @@
+<div class="container-fluid mt-2">
+  <h1><%=@users.first_name%> <%=@users.last_name%></h1>
+  <div class="containter-fluid mt-2 p-3">
+    <p>Email: <%=@users.email%></p>
+    <p>Age: <%=@users.age%> ans</p>
+    <p>City: <%= link_to @users.city.name, city_path(@users.city.id) %></p>
+    <p>Description: <%=@users.description%></p>
+  </div>
+</div>

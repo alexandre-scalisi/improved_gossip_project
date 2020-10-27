@@ -1,0 +1,7 @@
+<%@gossip.comments.each do |c|%>
+<p>Commentaire :<%= link_to c.content, comment_path(@gossip.id,c.id) %> </p>
+<a href="<%= edit_comment_path(@gossip.id,c.id) %>" class="btn">Modifier le commentaire</a>
+<a href="<%= comment_path(@gossip.id,c.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Supprimer le gossip</a><br>
+<%end%>
+
+<a href="<%= gossip_path(@gossip.id) %>" class="btn">Page potin du commentaire</a>

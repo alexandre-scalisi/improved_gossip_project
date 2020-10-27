@@ -5,6 +5,8 @@ Gossip.destroy_all
 Tag.destroy_all
 User.destroy_all
 City.destroy_all
+Comment.destroy_all
+Like.destroy_all
 PrivateMessage.destroy_all
 JoinTableTagGossip.destroy_all
 LierPrivateMessageUser.destroy_all
@@ -83,3 +85,26 @@ end
 puts
 puts "Lier private message et users table"
 tp LierPrivateMessageUser.all
+
+#Comments
+20.times do |c|
+  Comment.create(user: User.all.sample, gossip: Gossip.all.sample, content:Faker::Quote.famous_last_words)
+end
+
+puts
+puts "Comments"
+tp Comment.all
+
+#likes
+20.times do |l|
+  rand_num = rand(1..2)
+  if rand_num==1
+   Like.create(comment_id: Comment.all.sample.id)
+  else
+    Like.create(gossip_id: Gossip.all.sample.id)
+  end
+end
+
+puts
+puts "Likes"
+tp Like.all
