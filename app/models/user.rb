@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  validates :first_name, :last_name, :description, :email, :age, presence:true
+  validates :age, :numericality=> true, :inclusion => {:in => 1..100, :message => "Value should be between 0 and 4"}
+  validates :first_name, :last_name, length: {in: 2..30}
+  validates :description, length: {in: 3..1000}
+  validates :email, uniqueness:true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "email adress please" }
   belongs_to :city
   has_many :gossips
   has_many :LierPrivateMessageUsers

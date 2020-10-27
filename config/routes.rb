@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  resources :gossips, only: [:new, :create]
   get 'user/info'
   get 'gossips/names'
   get '/', to: 'accueil#show', as: 'home'

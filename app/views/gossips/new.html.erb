@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <h1>Form for creating gossips</h1>
+  <%= form_tag url_for(action: 'create'), method: "post" do %>
+
+  <%= label_tag 'Title : ' %>
+  <%= text_field_tag 'title' %>
+  <br /> <br />
+
+  <%= label_tag 'Content : ' %>
+  <%= text_area_tag 'content',nil, :rows => 3, :cols => 50 %>
+  <br /> <br />
+
+  <%= label_tag 'Author : ' %>
+  <%= text_field_tag 'author' %>
+  <br /> <br />
+
+  <%= submit_tag "Create gossip" %>
+
+  <% end %>
+</div>
