@@ -1,6 +1,8 @@
+<div class= "container-fluid m-4">
 <p>Author: <%= @comment.user.first_name%> <%= @comment.user.last_name%></p>
 <p>Gossip: <%= @comment.gossip.title%></p>
 <p>Comment: <%=@comment.content %></p>
 
 <%= link_to 'Page du gossip', gossip_comments_path, class: :btn %>
-</a>
+
+</div>

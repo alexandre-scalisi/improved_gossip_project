@@ -1,12 +1,24 @@
-<%@gossip.comments.each do |c|%>
-Commentaire :   <%= link_to c.content, gossip_comment_path(@gossip.id,c.id) %> 
-<%if sess_id && c.user_id == sess_id%>
+<div class="container-fluid mt-4">
 
-<a href="<%=  %>" class="btn" data-method="DELETE"></a>
-<%= link_to 'Modifier le commentaire', edit_gossip_comment_path(@gossip.id,c.id), class: :btn %>
-<%= link_to 'Supprimer le commentaire', gossip_comment_path(@gossip.id,c.id), class: :btn, data: {confirm:"Are you sure?"}, method: :delete%>
-<%end%>
+<%unless @gossip.comments.empty?%>
+<h1>Comments</h1><br>
+<% @gossip.comments.each do |c| %>
+<li class="list-group-item list-group-item-action">
+  <div class="d-flex w-100 justify-content-between">
+    <h4 class="mb-1"> <%= link_to c.content, gossip_comment_path(@gossip.id,c.id) %></h4>
+  <%if sess_id && c.user_id == sess_id%>
+  <small
+    class="text-muted"><%=link_to 'edit comment', edit_gossip_comment_path(@gossip.id,c.id), class: "btn btn-secondary" %> 
+    <%= link_to 'delete comment', gossip_comment_path(@gossip.id,c.id), class: "btn btn-danger", data: {confirm:"Are you sure?"}, method: :delete%></small>
+  <%end%>
+</li>
+<% end %>
+
+<% else %>
+<h1>No gossips</h1>
+<% end %>
+
 <br><br>
-<%end%>
+<%= link_to 'Page potin de ces commentaires', gossip_path(@gossip.id), class: "btn btn-dark" %>
 
-<%= link_to 'Page potin de ces commentaires', gossip_path(@gossip.id), class: :btn %>
+</div>

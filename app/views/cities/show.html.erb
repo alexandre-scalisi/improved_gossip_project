@@ -1,18 +1,22 @@
-<div class="container-fluid">
-  <h1>City name : <%= @city.name %></h1>
+<div class="container mt-4 pt-4">
+  <h1>City name : <%= @city.name %></h1><br><br>
+
   <div class="list-group">
   
   <%if @gossips%>
+  <h1>Gossips : </h1><br><br>
     <% @gossips.each do |g| %>
-        <a href="#" class="list-group-item list-group-item-action">
+        <li class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">Title : <%=g.title %></h5>
         <small class="text-muted"><%=g.created_at%></small>
       </div>
       <p class="mb-1">Content: <%=g.content%>.</p>
       <small class="text-muted">Author: <%=g.user.first_name%> <%=g.user.last_name%></small>
-    </a>
+    </li>
     <% end %>
+  
+  <% else %>
+  <h1>No gossips</h1>
   <% end %>
-
 </div>

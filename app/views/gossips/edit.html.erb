@@ -1,28 +1,33 @@
-<%= form_for(@gossip) do |f| %>
-  <div id="error_explanation">
-      <% if @gossip.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@gossip.errors.count, "error") %> prohibited this gossip from being saved:</h2>
+<div class="container-fluid mt-4 pb-4">
 
-      <ul>
+  <%= form_for(@gossip) do |f| %>
+
+  <% if @gossip.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@gossip.errors.count, "error") %> prohibited this gossip from being saved:</h2>
+
+    <ul>
       <% @gossip.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <li><%= msg %></li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+  </div>
   <% end %>
-  
+
   <div class="field">
-    <%= f.label :title %><br>
+    <h3><%= f.label :Title %></h3>
     <%= f.text_field :title %>
   </div>
 
+  <br><br>
   <div class="field">
-    <%= f.label :content %><br>
+    <h3><%= f.label :content %></h3>
     <%= f.text_area :content %>
   </div>
 
+  <br><br>
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+  <% end %>
+</div>

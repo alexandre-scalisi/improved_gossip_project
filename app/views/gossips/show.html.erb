@@ -1,35 +1,44 @@
 <div class="container-fluid mt-4">
-  <h1><%=@gossip.title%></h1>
-  <div class="container-fluid">
-    <div class="pt-2">
-      <h3>Author : <%= link_to "#{@gossip.user.first_name}", user_path(@gossip.user.id) %>, from <%= link_to @gossip.user.city.name, city_path(@gossip.user.city.id) %></h3>
-    </div>
-    <div class="pt-3">
-      <p>Content: <%=@gossip.content%></p>
-      <p>Creation date: <%=@gossip.created_at%></p>
-    </div>
-    <%if sess_id%>
+  <h1>Title : <%=@gossip.title%></h1> <br>
 
-      <%if @is_user%>
-        <%= link_to 'Modifier le gossip', edit_gossip_path(@gossip.id),class: :btn %>
-        <%= link_to 'Supprimer le gossip', gossip_path(@gossip.id),class: :btn, data: {confirm:"Are you sure?"}, method: :delete %>
-      <%end%>
+  <div class="list-group">
 
-      <%= link_to 'Ajouter commentaire', new_gossip_comment_path(@gossip.id),class: :btn %>
+    <li class="list-group-item list-group-item-action p-4">
+      <div class="d-flex w-100 justify-content-between">
+        <h2 class="mb-3 pb-3">Author :
+          <%= link_to "#{@gossip.user.first_name} #{@gossip.user.last_name}", user_path(@gossip.user.id) %> </h3>
+          <small class="text-muted"><%= link_to @gossip.user.city.name, city_path(@gossip.user.city.id) %>
+      </div>
+      <div class="d-flex w-100 justify-content-between">
+        <p class="mb-3"><%=@gossip.content %></p>
+        <small class="text-muted"><%=@gossip.created_at%></small>
+      </div>
 
-    <%end%>
-    
-    <%= link_to "#{@gossip.comments.length} commentaires", gossip_comments_path(@gossip.id), class: :btn %>
 
-    <%if sess_id.nil? %>
-      <span><%=@gossip.likers.length%> likes</span>
-    <%elsif @already_liked%>
-      <%= link_to "#{@gossip.likers.length} likes",gossip_likes_path(@gossip.id), class: :btn %>
-    <%else%>
-      <%= link_to "#{@gossip.likers.length} likes", gossip_likes_path(@gossip.id), class: :btn, style: {color: :black} %>
-    <%end%>
-    
-    
+    </li>
+
+
   </div>
-  <%= link_to 'Home', '/', class: :btn %>
+  <%if sess_id%>
+
+  <%if @is_user%>
+  <%= link_to 'Modifier le gossip', edit_gossip_path(@gossip.id),class: :btn %>
+  <%= link_to 'Supprimer le gossip', gossip_path(@gossip.id),class: :btn, data: {confirm:"Are you sure?"}, method: :delete %>
+  <%end%>
+
+  <%= link_to 'Ajouter commentaire', new_gossip_comment_path(@gossip.id),class: :btn %>
+
+  <%end%>
+
+  <%= link_to "#{@gossip.comments.length} commentaires", gossip_comments_path(@gossip.id), class: :btn %>
+
+  <%if sess_id.nil? %>
+  <span><%=@gossip.likers.length%> likes</span>
+  <%elsif @already_liked%>
+  <%= link_to "#{@gossip.likers.length} likes",gossip_likes_path(@gossip.id), class: :btn %>
+  <%else%>
+  <%= link_to "#{@gossip.likers.length} likes", gossip_likes_path(@gossip.id), class: :btn, style: {color: :black} %>
+  <%end%>
+  <br><br><%= link_to 'Home', '/', :class => "btn btn-primary"%>
+
 </div>
