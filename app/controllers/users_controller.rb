@@ -15,9 +15,12 @@ class UsersController < ApplicationController
   end
 
   def create
+    @cities = City.all
     @user = User.new(params.permit(:first_name, :last_name, :description, :email, :age, :password))
     @user.city = City.find_by(params.permit(:zip_code))
+    @user.valid?
     if @user.save
+    
       flash[:success] = 'Nouveau User ajouté avec succés'
       redirect_to user_path(@user.id)
     else

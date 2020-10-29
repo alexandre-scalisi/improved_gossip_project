@@ -1,8 +1,15 @@
 <%= form_for [@gossip,@comment] do |f| %>
-
   <% if @comment.errors.any? %>
-  
-  <%end%>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :Content %><br>
     <%= f.text_field :content %>
@@ -11,4 +18,6 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+
+ 
 <% end %>

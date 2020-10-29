@@ -8,8 +8,10 @@ class SessionsController < ApplicationController
     user = User.find_by(email)
     if user && user.authenticate(params.permit(:password)[:password])
       log_in(user)
-      redirect_to '/'
-    else render :new
+      redirect_to welcome_path(current_user.first_name)
+    else 
+      flash[:failure] = "Echec lors de la l'authentification, veuillez réessayer"
+      redirect_to new_session_path
     end
   end
 

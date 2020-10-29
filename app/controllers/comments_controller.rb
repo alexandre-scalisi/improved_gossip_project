@@ -17,6 +17,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(post_params)
     @comment.user = current_user
     @comment.gossip = get_gossip
+    @comment.valid?
     if @comment.save
       flash[:success] = 'Nouveau comment ajouté avec succés'
       redirect_to gossip_comments_path
@@ -38,6 +39,7 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to gossip_comments_path
   end
+
 
   private
 
