@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :verify_user, only: [:edit, :update, :destroy]
   def index
     puts params
     @gossip = Gossip.find(params[:id1])
@@ -6,6 +7,7 @@ class CommentsController < ApplicationController
   
   def show
     @comment = Comment.find(params[:id])
+    
     
   end
 
@@ -15,7 +17,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    puts params
+ 
     @comments = Comment.all
     @comment = Comment.new(post_params)
     @comment.user = User.last
@@ -54,4 +56,11 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content)
   end
 
+
+  def verify_user
+    unless session[:user_id] && (Comment.find(params[:id]).user_id == session[:user_id])
+      flash[:failure] = "Ou tu vas petit filou ?"
+      redirect_to "/"
+    end
+  end
 end

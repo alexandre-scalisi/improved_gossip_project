@@ -13,15 +13,16 @@ LierPrivateMessageUser.destroy_all
 
 #Cities
 
-10.times do
+1000.times do
   city_and_zip = Faker::Address.full_address.split(', ').last
   zip = city_and_zip.split(' ').first
   city_name = city_and_zip.split(' ').last
+  next if City.find_by(name:city_name)
   City.create(name: city_name, zip_code: zip)
 end
 puts
 puts "Cities table"
-tp City.all
+tp City.all.limit(20)
 #Users
 adjectifs= %w[petit grand maigre gros chauve muscle intelligent parfait mediocre insupportable eblouissant valeureux]
 10.times do 
@@ -29,7 +30,7 @@ adjectifs= %w[petit grand maigre gros chauve muscle intelligent parfait mediocre
   age = rand(18..90)
   city = City.all.sample
    text = "Je m'appelle #{first_name}, je suis #{adjectifs.sample} et mon livre préféré est #{Faker::Book.title}, je suis #{Faker::Name.title[:job].sample} à #{city.name} "
-  User.create(first_name: first_name, last_name: Faker::Name.last_name ,description: text, email: Faker::Internet.email, age: age, city: city )
+  User.create(first_name: first_name, last_name: Faker::Name.last_name ,description: text, email: Faker::Internet.email, age: age, city: city,password:"abcdef" )
 
 end
 puts
@@ -50,7 +51,7 @@ tp Gossip.all
   Tag.create(title: Faker::Verb.base)
 end
 puts
-puts "Cities table"
+puts "Tags table"
 tp Tag.all
 
 Tag.all.each do |t|
@@ -99,9 +100,9 @@ tp Comment.all
 20.times do |l|
   rand_num = rand(1..2)
   if rand_num==1
-   Like.create(comment_id: Comment.all.sample.id)
+   Like.create(comment_id: Comment.all.sample.id,user: User.all.sample)
   else
-    Like.create(gossip_id: Gossip.all.sample.id)
+    Like.create(gossip_id: Gossip.all.sample.id,user: User.all.sample)
   end
 end
 
