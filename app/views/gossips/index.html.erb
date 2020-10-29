@@ -14,7 +14,7 @@
         <p class="card-text"><%= link_to "#{g.title}", gossip_path("#{g.id}")%> </p>
         
         <%end%>
-        <%if u.id == session[:user_id]%>
+        <%if u.id == sess_id%>
     
    <a href= "<%=new_gossip_path%>" class="btn ">Créer un gossip</a> 
    <%end%>

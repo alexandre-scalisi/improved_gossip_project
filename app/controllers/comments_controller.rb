@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
 
 
   def verify_user
-    unless session[:user_id] && (Comment.find(params[:id]).user_id == session[:user_id])
+    unless sess_id && (Comment.find(params[:id]).user_id == sess_id)
       flash[:failure] = "Ou tu vas petit filou ?"
       redirect_to "/"
     end

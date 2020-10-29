@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+  before_action :get_user, except: [:index,:new, :create]
   def show
     @users = User.find(params[:id])
   end
@@ -23,22 +25,18 @@ class UsersController < ApplicationController
         render :new
       end
       
-  
-      
     end
   
     def edit
-      @user = User.find(params[:id])
+      
     end
   
     def update
-      @user = User.find(params[:id])
        @user.update(post_params)
       redirect_to user_path(@user.id)
     end
   
     def destroy
-      @user = User.find(params[:id])
       @user.destroy
       redirect_to "/"
     end
@@ -50,6 +48,8 @@ class UsersController < ApplicationController
     end
   
   
-  
+    def get_user
+      @user = User.find(params[:id])
+    end
   
 end

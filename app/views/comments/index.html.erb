@@ -1,6 +1,6 @@
 <%@gossip.comments.each do |c|%>
 Commentaire :   <%= link_to c.content, gossip_comment_path(@gossip.id,c.id) %> 
-<%if session[:user_id] && c.user_id == session[:user_id]%>
+<%if sess_id && c.user_id == sess_id%>
 <a href="<%= edit_gossip_comment_path(@gossip.id,c.id) %>" class="btn">Modifier le commentaire</a>
 <a href="<%= gossip_comment_path(@gossip.id,c.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Supprimer le commentaire</a>
 <%end%>

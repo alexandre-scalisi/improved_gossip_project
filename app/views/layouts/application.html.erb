@@ -17,7 +17,7 @@
   </head>
 
   <body>
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
       <%= link_to 'The Gossip Project', "/", :class => "navbar-brand" %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,34 +37,35 @@
         </ul>
         
       </div>
-      <%unless session[:user_id] %>
-      <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Log in / Sign in
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="<%=new_session_path%>">Log in</a>
-    <a class="dropdown-item" href="<%=new_user_path%>">Sign in</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
-<%else%>
-<ul class="navbar-nav mr-auto">
+      <%unless sess_id %>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Log in / Sign in
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to 'Log in', new_session_path, :class => "dropdown-item"%>
+            <%= link_to 'Sign in', new_user_path, :class => "dropdown-item"%>
+          </div>
+        </div>
+      <%else%>
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <%= link_to 'Se deconnecter', session_path(session[:user_id]), :method => :delete,data: {confirm:"Are you sure?"} ,:class => "nav-link"%>
+            <%= link_to 'Se deconnecter', session_path(sess_id), :method => :delete,data: {confirm:"Are you sure?"} ,:class => "nav-link"%>
           </li>
-          </ul>
-    <%end%> 
+        </ul>
+      <%end%> 
     </nav>
-    
-      
+         
     <div class="container-fluid">
+
     <% if flash[:success] %>
     <div class="alert alert-success"> <%=flash[:success]%></div>
     <% end%>
+
     <% if flash[:failure] %>
     <div class="alert alert-danger"> <%=flash[:failure]%></div>
     <% end%>
+
     </div>
     <%= yield %>
   </body>

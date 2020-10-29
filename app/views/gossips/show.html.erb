@@ -8,7 +8,7 @@
       <p>Content: <%=@gossip.content%></p>
       <p>Creation date: <%=@gossip.created_at%></p>
     </div>
-    <%if session[:user_id]%>
+    <%if sess_id%>
     
     
     
@@ -21,7 +21,7 @@
     <%end%>
     
     <a href="<%= gossip_comments_path(@gossip.id) %>" class="btn"><%=@gossip.comments.length%> commentaires</a>
-    <%if session[:user_id].nil? %>
+    <%if sess_id.nil? %>
     <span><%=@gossip.likers.length%> likes</span>
     <%elsif @already_liked%>
     <a href="<%= gossip_likes_path(@gossip.id) %>" class="btn"> <%=@gossip.likers.length%> likes</a>
