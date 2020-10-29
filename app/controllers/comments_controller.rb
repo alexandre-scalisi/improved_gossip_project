@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :verify_user, only: %i[edit update destroy]
   before_action :get_comment, except: %i[index new create]
-  before_action :get_gossip, only: %i[index new edit]
+  before_action :get_gossip, only: %i[index new edit update]
  
   def index
   end
@@ -14,6 +14,7 @@ class CommentsController < ApplicationController
   end
 
   def create
+    
     @comment = Comment.new(post_params)
     @comment.user = current_user
     @comment.gossip = get_gossip
@@ -22,7 +23,7 @@ class CommentsController < ApplicationController
       flash[:success] = 'Nouveau comment ajouté avec succés'
       redirect_to gossip_comments_path
     else
-      flash[:failure] = 'Echec lors de la création du comment, veuillez réessayer'
+      flash.now[:failure] = 'Echec lors de la création du comment, veuillez réessayer'
       render :new
     end
   end
@@ -32,7 +33,13 @@ class CommentsController < ApplicationController
 
   def update
     @comment.update(post_params)
-    redirect_to gossip_comments_path
+    if @comment.valid?
+      flash[:success] = 'Comment modifié avec succés'
+      redirect_to gossip_comments_path
+    else 
+      flash.now[:failure] = 'Echec lors de la modification du comment, veuillez réessayer'
+      render :edit
+    end
   end
 
   def destroy

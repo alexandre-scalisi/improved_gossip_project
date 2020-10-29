@@ -23,9 +23,9 @@ class GossipsController < ApplicationController
     if @gossip.save
 
       flash[:success] = 'Nouveau gossip ajouté avec succés'
-      redirect_to gossip_path(@gossip.id)
+      redirect_to gossip_path(@comment.id)
     else
-      flash[:failure] = 'Echec lors de la création du gossip, veuillez réessayer'
+      flash.now[:failure] = 'Echec lors de la création du gossip, veuillez réessayer'
       render :new
     end
   end
@@ -35,7 +35,14 @@ class GossipsController < ApplicationController
 
   def update
     @gossip.update(post_params)
-    redirect_to gossip_path(@gossip.id)
+    if @gossip.valid?
+      flash[:success] = 'gossip modifié avec succés'
+      redirect_to gossip_path(@gossip.id)
+    else 
+      flash.now[:failure] = 'Echec lors de la modification du gossip, veuillez réessayer'
+      render :edit
+    end
+    
   end
 
   def destroy

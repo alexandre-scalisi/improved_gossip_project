@@ -19,12 +19,12 @@
 
     <%end%>
     
-    <%= link_to 'commentaires', gossip_comments_path(@gossip.id), class: :btn %>
+    <%= link_to "#{@gossip.comments.length} commentaires", gossip_comments_path(@gossip.id), class: :btn %>
 
     <%if sess_id.nil? %>
       <span><%=@gossip.likers.length%> likes</span>
     <%elsif @already_liked%>
-      <%= link_to 'likes', gossip_likes_path(@gossip.id), class: :btn %>
+      <%= link_to "#{@gossip.likers.length} likes",gossip_likes_path(@gossip.id), class: :btn %>
     <%else%>
       <%= link_to "#{@gossip.likers.length} likes", gossip_likes_path(@gossip.id), class: :btn, style: {color: :black} %>
     <%end%>

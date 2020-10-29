@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Nouveau User ajouté avec succés'
       redirect_to user_path(@user.id)
     else
-      flash[:failure] = 'Echec lors de la création du User, veuillez réessayer'
+      flash.now[:failure] = 'Echec lors de la création du User, veuillez réessayer'
       render :new
     end
   end

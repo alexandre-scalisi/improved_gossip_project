@@ -1,6 +1,16 @@
-<div class="container-fluid p-4 m-4">
-  <h1>Bienvenue visiteur. Ici c'est notre super site de potins, il est chouette, non ? </h1>
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Salut! <span style="font-size:100px">&#128540;</span></h1><br><br>
+      <p>C'est un site comme facebook (en moins ambitieux) où les gens racontent des potins et peuvent réagir aux potins des autres ! 
+      J'espère qu'il te plaira <span>&#128514;</span>
+      </p>
+      
+    </div>
+  </div>
 
+
+<div class="container-fluid p-4 m-4">
+  
 
   <div class="row p-3 m-4">
     <% @users.each do |u|%>
@@ -11,12 +21,12 @@
       </div>
       <div class="card-body">
         <%u.gossips.each do |g|%>
-        <p class="card-text"><%= link_to "#{g.title}", gossip_path("#{g.id}")%> </p>
+        - <%= link_to g.title, gossip_path(g.id), :class => "card-text"%><br><br>
 
         <%end%>
         <%if u.id == sess_id%>
 
-        <%= link_to 'Créer un gossip', new_gossip_path, class: :btn %>
+        <br><%= link_to 'Créer un gossip', new_gossip_path, :class => "btn btn-primary"%>
         <%end%>
       </div>
     </div>
@@ -26,3 +36,4 @@
 
   </div>
 </div>
+
