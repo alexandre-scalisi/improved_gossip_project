@@ -1,13 +1,14 @@
 class GossipsController < ApplicationController
-  before_action :authenticate_user, only: [:new,:create,:like]
-  before_action :verify_user, only: [:edit, :update, :destroy]
-  before_action :get_gossip, except: [:index, :new, :create]
+  before_action :authenticate_user, only: %i[new create like]
+  before_action :verify_user, only: %i[edit update destroy]
+  before_action :get_gossip, except: %i[index new create]
   def index
     @users = User.all
   end
-  
+
   def show
-    unless sess_id then return end
+    return unless sess_id
+
     @is_user = @gossip.user == current_user
     @already_liked = @gossip.likers.include?(current_user)
   end
@@ -21,32 +22,29 @@ class GossipsController < ApplicationController
     @gossip.user = current_user
     if @gossip.save
 
-     flash[:success] = "Nouveau gossip ajouté avec succés"
-     redirect_to gossip_path(@gossip.id)
+      flash[:success] = 'Nouveau gossip ajouté avec succés'
+      redirect_to gossip_path(@gossip.id)
     else
-      flash[:failure] = "Echec lors de la création du gossip, veuillez réessayer"
+      flash[:failure] = 'Echec lors de la création du gossip, veuillez réessayer'
       render :new
     end
-    
-
-    
   end
 
   def edit
   end
 
   def update
-     @gossip.update(post_params)
+    @gossip.update(post_params)
     redirect_to gossip_path(@gossip.id)
   end
 
   def destroy
     @gossip.destroy
-    redirect_to "/"
+    redirect_to '/'
   end
 
   def like
-    like = Like.find_by(user_id:sess_id,gossip_id: @gossip.id )
+    like = Like.find_by(user_id: sess_id, gossip_id: @gossip.id)
     if like
       like.destroy
     else
@@ -54,32 +52,28 @@ class GossipsController < ApplicationController
     end
     redirect_to gossip_path(@gossip.id)
   end
-  
 
   private
 
   def post_params
     params.require(:gossip).permit(:title, :content)
   end
-  
 
   def authenticate_user
     unless sess_id
-      flash[:failure] = "Please log in."
+      flash[:failure] = 'Please log in.'
       redirect_to new_session_path
     end
   end
 
   def verify_user
     unless sess_id && (Gossip.find(params[:id]).user_id == sess_id)
-      flash[:failure] = "Ou tu vas petit filou ?"
-      redirect_to "/"
+      flash[:failure] = 'Ou tu vas petit filou ?'
+      redirect_to '/'
     end
   end
 
   def get_gossip
     @gossip = Gossip.find(params[:id])
   end
-
-  
 end

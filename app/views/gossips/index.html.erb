@@ -12,17 +12,17 @@
       <div class="card-body">
         <%u.gossips.each do |g|%>
         <p class="card-text"><%= link_to "#{g.title}", gossip_path("#{g.id}")%> </p>
-        
+
         <%end%>
         <%if u.id == sess_id%>
-    
-   <a href= "<%=new_gossip_path%>" class="btn ">Créer un gossip</a> 
-   <%end%>
+
+        <%= link_to 'Créer un gossip', new_gossip_path, class: :btn %>
+        <%end%>
       </div>
     </div>
-    
-    
+
+
     <%end%>
-    
+
   </div>
 </div>

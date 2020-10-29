@@ -2,5 +2,5 @@
 <p>Gossip: <%= @comment.gossip.title%></p>
 <p>Comment: <%=@comment.content %></p>
 
-<a href="<%= gossip_comments_path %>" class="btn">Page du gossip
+<%= link_to 'Page du gossip', gossip_comments_path, class: :btn %>
 </a>

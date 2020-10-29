@@ -1,10 +1,12 @@
 <%@gossip.comments.each do |c|%>
 Commentaire :   <%= link_to c.content, gossip_comment_path(@gossip.id,c.id) %> 
 <%if sess_id && c.user_id == sess_id%>
-<a href="<%= edit_gossip_comment_path(@gossip.id,c.id) %>" class="btn">Modifier le commentaire</a>
-<a href="<%= gossip_comment_path(@gossip.id,c.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Supprimer le commentaire</a>
+
+<a href="<%=  %>" class="btn" data-method="DELETE"></a>
+<%= link_to 'Modifier le commentaire', edit_gossip_comment_path(@gossip.id,c.id), class: :btn %>
+<%= link_to 'Supprimer le commentaire', gossip_comment_path(@gossip.id,c.id), class: :btn, data: {confirm:"Are you sure?"}, method: :delete%>
 <%end%>
 <br><br>
 <%end%>
 
-<a href="<%= gossip_path(@gossip.id) %>" class="btn">Page potin de ces commentaires</a>
+<%= link_to 'Page potin de ces commentaires', gossip_path(@gossip.id), class: :btn %>
