@@ -17,10 +17,10 @@
       <a href="<%= gossip_path(@gossip.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Supprimer le gossip</a>
     
     <%end%>
-    <a href="<%= new_comment_path(@gossip.id) %>" class="btn">Ajouter commentaire</a>
+    <a href="<%= new_gossip_comment_path(@gossip.id) %>" class="btn">Ajouter commentaire</a>
     <%end%>
     
-    <a href="<%= comments_path(@gossip.id) %>" class="btn"><%=@gossip.comments.length%> commentaires</a>
+    <a href="<%= gossip_comments_path(@gossip.id) %>" class="btn"><%=@gossip.comments.length%> commentaires</a>
     <%if session[:user_id].nil? %>
     <span><%=@gossip.likers.length%> likes</span>
     <%elsif @already_liked%>

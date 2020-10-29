@@ -22,7 +22,6 @@ class GossipsController < ApplicationController
     if @gossip.save
 
      flash[:success] = "Nouveau gossip ajouté avec succés"
-     sleep(3)
      redirect_to gossip_path(@gossip.id)
     else
       flash[:failure] = "Echec lors de la création du gossip, veuillez réessayer"

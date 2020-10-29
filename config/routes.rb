@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  resources :gossips
+  resources :gossips do
+    resources :comments
+  end
   resources :users
   resources :cities, only:[:show]
-  resources :sessions, only:[:new, :create, :destroy]
-  resources :comments, :path => "/gossips/:id1/comments"
-  get '/', to: 'home#show'
+  resources :sessions, only:[:new, :create, :destroy] 
+  
+  root to:'gossips#index', as: 'home'
   get '/team', to:'team#show'
   get '/contact', to:'contact#show'
   get '/welcome/:first_name', to:'welcome#show', as: :welcome
