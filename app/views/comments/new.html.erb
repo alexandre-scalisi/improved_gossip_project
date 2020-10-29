@@ -1,5 +1,5 @@
 <div class="container-fluid mt-4 pb-4">
-  
+
   <%= form_for [@gossip,@comment] do |f| %>
   <% if @comment.errors.any? %>
   <div id="error_explanation">
@@ -18,7 +18,8 @@
     <%= f.text_field :content %>
   </div>
 
-  <br><div class="actions">
+  <br>
+  <div class="actions">
     <%= f.submit %>
   </div>
 
